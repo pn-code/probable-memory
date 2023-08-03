@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navigation/Navbar";
+import SubNavbar from "./components/Navigation/SubNavbar";
 
 export const metadata: Metadata = {
     title: "Definitely Not MySpace",
@@ -16,6 +17,7 @@ export default function RootLayout({
         <html lang="en">
             <body>
                 <Navbar />
+                <SubNavbar />
                 {children}
             </body>
         </html>
