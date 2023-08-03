@@ -1,7 +1,7 @@
-
 import { getClient } from "@/lib/client";
 
 import { gql } from "@apollo/client";
+import MemberLogin from "./components/Auth/MemberLogin";
 
 const query = gql`
     query Now {
@@ -20,5 +20,10 @@ export default async function Home() {
         },
     });
 
-    return <main>{data.now}</main>;
+    return (
+        <main className="flex px-2">
+            <section className="flex-[4]"></section>
+            <MemberLogin />
+        </main>
+    );
 }
