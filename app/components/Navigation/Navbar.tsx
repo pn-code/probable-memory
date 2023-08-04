@@ -6,18 +6,18 @@ export default function Navbar() {
     return (
         <nav className="w-full bg-navy-blue text-[#FFFF] px-4 py-2 flex justify-between">
             {/* Left Side & Brand Logo & Home Navigation */}
-            <header className="flex gap-4 items-center">
+            <Link href="/" className="flex gap-4 items-center">
                 <Users2 size={80} />
                 <section className="flex flex-col items-end">
-                    <h1 className="text-3xl font-semibold tracking-tight">
+                    <h1 className="text-xl sm:text-3xl font-semibold tracking-tight">
                         definitely not myspace
                     </h1>
-                    <span>not just a place for friends</span>
+                    <span className="text-xs sm:text-[16px]">not just a place for friends</span>
                 </section>
-            </header>
+            </Link>
 
             {/* Right Side */}
-            <section className="flex flex-col gap-1 items-end">
+            <section className="hidden md:flex flex-col gap-1 items-end">
                 {/* Upper Right Side */}
                 <ul className="flex gap-2.5 text-sm mt-1">
                     <li>

@@ -16,7 +16,7 @@ import {
 
 export default function SubNavbar() {
     return (
-        <nav className="border-b border-navy-blue/50 mb-2">
+        <nav className="hidden sm:flex border-b border-navy-blue/50 mb-2">
             <ul className="flex w-full">
                 <li>
                     <Link

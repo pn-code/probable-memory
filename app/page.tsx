@@ -22,7 +22,7 @@ export default async function Home() {
     });
 
     return (
-        <main className="flex px-2">
+        <main className="flex flex-col md:flex-row px-2 md:gap-2">
             <section className="flex-[3]">
                 <FeatureSection />
             </section>
