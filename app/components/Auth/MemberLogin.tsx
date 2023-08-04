@@ -3,7 +3,7 @@ import React from "react";
 
 export default function MemberLogin() {
     return (
-        <form className="flex-1 border-navy-blue border-2">
+        <form className="flex-1 border-navy-blue border-2 rounded-sm">
             <h2 className="w-full bg-navy-blue text-white pl-4 py-1 font-semibold">
                 Member Login
             </h2>
