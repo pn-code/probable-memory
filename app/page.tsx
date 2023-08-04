@@ -2,6 +2,7 @@ import { getClient } from "@/lib/client";
 
 import { gql } from "@apollo/client";
 import MemberLogin from "./components/Auth/MemberLogin";
+import FeatureSection from "./components/Navigation/FeatureSection";
 
 const query = gql`
     query Now {
@@ -22,7 +23,9 @@ export default async function Home() {
 
     return (
         <main className="flex px-2">
-            <section className="flex-[4]"></section>
+            <section className="flex-[3]">
+                <FeatureSection />
+            </section>
             <MemberLogin />
         </main>
     );
