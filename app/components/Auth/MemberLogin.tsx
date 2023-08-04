@@ -11,14 +11,14 @@ export default function MemberLogin() {
                 <section className="flex gap-2 justify-between">
                     <label className="flex justify-end w-full" htmlFor="email">Email: </label>
                     <input
-                        className="w-[180px] border-gray-400 border rounded-sm px-1 text-sm"
+                        className="w-[180px] border-gray-400 border rounded-sm px-1 text-sm py-0.5"
                         type="text"
                     />
                 </section>
                 <section className="flex gap-2 justify-between">
                     <label className="flex justify-end w-full" htmlFor="password">Password: </label>
                     <input
-                        className="w-[180px] border-gray-400 border rounded-sm px-1 text-sm"
+                        className="w-[180px] border-gray-400 border rounded-sm px-1 text-sm py-0.5"
                         type="password"
                     />
                 </section>

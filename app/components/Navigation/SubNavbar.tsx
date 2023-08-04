@@ -4,6 +4,7 @@ import {
     AppWindow,
     CalendarHeart,
     Compass,
+    Flame,
     Home,
     Info,
     Laugh,
@@ -33,6 +34,15 @@ export default function SubNavbar() {
                     >
                         <Compass />
                         <span>Browse</span>
+                    </Link>
+                </li>
+                <li>
+                    <Link
+                        className="flex flex-col text-gray-600 justify-center items-center text-sm hover:bg-blue-500 ease-linear duration-200 hover:text-gray-100 p-4 w-[10vw]"
+                        href="/"
+                    >
+                        <Flame/>
+                        <span>Trending</span>
                     </Link>
                 </li>
                 <li>
