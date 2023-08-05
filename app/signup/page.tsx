@@ -1,5 +1,6 @@
 "use client";
 import React, { FormEvent, useState } from "react";
+import axios from "axios"
 
 export default function SignUp() {
     const [firstName, setFirstName] = useState<string>("");
@@ -19,7 +20,15 @@ export default function SignUp() {
             birthday,
             gender,
         };
-        console.log(payload);
+
+        try {
+            console.log(payload);
+            const res = await axios.post("/api/users/signup", payload)
+            console.log(res)
+        } catch (error:any) {
+            console.error(error.message)
+        }
+        
     };
 
     return (
