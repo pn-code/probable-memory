@@ -3,6 +3,7 @@ import React, { FormEvent, useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function SignUp() {
     const [firstName, setFirstName] = useState<string>("");
@@ -30,7 +31,7 @@ export default function SignUp() {
             };
 
             const res = await axios.post("/api/users/signup", payload);
-            router.push("/login");
+            router.push("/");
         } catch (error: any) {
             console.error(error.message);
             toast.error(error.message)
@@ -169,6 +170,7 @@ export default function SignUp() {
                             By clicking Sign Up, you agree to our Terms, Privacy
                             Policy and Cookies Policy.
                         </span>
+                        <Link className="text-xs text-blue-400 hover:text-blue-500 hover:underline" href="/login">Already have an account?</Link>
                         <button
                             disabled={disableSignUp || loading}
                             className="disabled:bg-blue-500/40 disabled:cursor-not-allowed text-white bg-blue-500 py-2 rounded-sm hover:bg-blue-600"
