@@ -1,6 +1,6 @@
 "use client";
-import React, { FormEvent, useState } from "react";
-import axios from "axios"
+import React, { FormEvent, useEffect, useState } from "react";
+import axios from "axios";
 
 export default function SignUp() {
     const [firstName, setFirstName] = useState<string>("");
@@ -9,6 +9,7 @@ export default function SignUp() {
     const [password, setPassword] = useState<string>("");
     const [birthday, setBirthday] = useState<string>("");
     const [gender, setGender] = useState<string>("male");
+    const [disableSignUp, setDisableSignUp] = useState(true);
 
     const handleSignUp = async (e: FormEvent) => {
         e.preventDefault();
@@ -23,13 +24,26 @@ export default function SignUp() {
 
         try {
             console.log(payload);
-            const res = await axios.post("/api/users/signup", payload)
-            console.log(res)
-        } catch (error:any) {
-            console.error(error.message)
+            const res = await axios.post("/api/users/signup", payload);
+            console.log(res);
+        } catch (error: any) {
+            console.error(error.message);
         }
-        
     };
+
+    useEffect(() => {
+        if (
+            email.length > 0 &&
+            firstName.length > 0 &&
+            lastName.length > 0 &&
+            password.length > 0 &&
+            birthday
+        ) {
+            setDisableSignUp(false);
+        } else {
+            setDisableSignUp(true);
+        }
+    }, []);
 
     return (
         <div className="w-full h-[65vh] flex flex-col items-center justify-center">
@@ -139,7 +153,7 @@ export default function SignUp() {
                             By clicking Sign Up, you agree to our Terms, Privacy
                             Policy and Cookies Policy.
                         </span>
-                        <button className="text-white bg-blue-500 py-2 rounded-sm hover:bg-blue-600">
+                        <button disabled={disableSignUp} className="disabled:bg-blue-500/40 disabled:cursor-not-allowed text-white bg-blue-500 py-2 rounded-sm hover:bg-blue-600">
                             Sign Up
                         </button>
                     </section>
