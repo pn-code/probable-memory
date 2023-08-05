@@ -1,6 +1,8 @@
 "use client";
 import React, { FormEvent, useEffect, useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function SignUp() {
     const [firstName, setFirstName] = useState<string>("");
@@ -9,25 +11,31 @@ export default function SignUp() {
     const [password, setPassword] = useState<string>("");
     const [birthday, setBirthday] = useState<string>("");
     const [gender, setGender] = useState<string>("male");
-    const [disableSignUp, setDisableSignUp] = useState(true);
+    const [disableSignUp, setDisableSignUp] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
+
+    const router = useRouter();
 
     const handleSignUp = async (e: FormEvent) => {
         e.preventDefault();
-        const payload = {
-            firstName,
-            lastName,
-            email,
-            password,
-            birthday,
-            gender,
-        };
-
         try {
-            console.log(payload);
+            setLoading(true);
+            const payload = {
+                firstName,
+                lastName,
+                email,
+                password,
+                birthday,
+                gender,
+            };
+
             const res = await axios.post("/api/users/signup", payload);
-            console.log(res);
+            router.push("/login");
         } catch (error: any) {
             console.error(error.message);
+            toast.error(error.message)
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -43,7 +51,7 @@ export default function SignUp() {
         } else {
             setDisableSignUp(true);
         }
-    }, []);
+    }, [email, firstName, lastName, password, birthday]);
 
     return (
         <div className="w-full h-[65vh] flex flex-col items-center justify-center">
@@ -52,11 +60,12 @@ export default function SignUp() {
                 className="border-gray-400 border-x border-b rounded-md"
             >
                 <h1 className="mb-2 text-xl font-semibold bg-navy-blue py-2 px-4 text-white rounded-t-md">
-                    Sign Up
+                    {loading ? "Creating user profile..." : "Sign Up"}
                 </h1>
                 <section className="flex flex-col gap-4 p-4">
                     <div className="flex justify-between gap-4">
                         <input
+                            disabled={loading}
                             className="border border-gray-400 px-2 py-1 rounded-sm"
                             onChange={(e) => setFirstName(e.target.value)}
                             type="text"
@@ -65,6 +74,7 @@ export default function SignUp() {
                             placeholder="First name"
                         />
                         <input
+                            disabled={loading}
                             className="border border-gray-400 px-2 py-1 rounded-sm"
                             onChange={(e) => setLastName(e.target.value)}
                             type="text"
@@ -75,6 +85,7 @@ export default function SignUp() {
                     </div>
 
                     <input
+                        disabled={loading}
                         className="border border-gray-400 px-2 py-1 rounded-sm"
                         onChange={(e) => setEmail(e.target.value)}
                         type="email"
@@ -84,6 +95,7 @@ export default function SignUp() {
                     />
 
                     <input
+                        disabled={loading}
                         className="border border-gray-400 px-2 py-1 rounded-sm"
                         onChange={(e) => setPassword(e.target.value)}
                         type="password"
@@ -100,6 +112,7 @@ export default function SignUp() {
                             Birthday
                         </label>
                         <input
+                            disabled={loading}
                             className="border border-gray-400 px-2 py-1 rounded-sm"
                             onChange={(e) => setBirthday(e.target.value)}
                             type="date"
@@ -116,6 +129,7 @@ export default function SignUp() {
                             <div className="w-full flex justify-between gap-4 bg-gray-100 border-gray-200 border p-2 rounded-md hover:bg-gray-200">
                                 <label htmlFor="male">Male</label>
                                 <input
+                                    disabled={loading}
                                     className="rounded-full "
                                     type="radio"
                                     name="gender"
@@ -127,6 +141,7 @@ export default function SignUp() {
                             <div className="w-full flex justify-between gap-4 bg-gray-100 border-gray-200 border p-2 rounded-md hover:bg-gray-200">
                                 <label htmlFor="female">Female</label>
                                 <input
+                                    disabled={loading}
                                     className="rounded-full "
                                     type="radio"
                                     name="gender"
@@ -138,6 +153,7 @@ export default function SignUp() {
                             <div className="w-full flex justify-between gap-4 bg-gray-100 border-gray-200 border p-2 rounded-md hover:bg-gray-200">
                                 <label htmlFor="other">Other</label>
                                 <input
+                                    disabled={loading}
                                     className="rounded-full "
                                     type="radio"
                                     name="gender"
@@ -153,7 +169,10 @@ export default function SignUp() {
                             By clicking Sign Up, you agree to our Terms, Privacy
                             Policy and Cookies Policy.
                         </span>
-                        <button disabled={disableSignUp} className="disabled:bg-blue-500/40 disabled:cursor-not-allowed text-white bg-blue-500 py-2 rounded-sm hover:bg-blue-600">
+                        <button
+                            disabled={disableSignUp || loading}
+                            className="disabled:bg-blue-500/40 disabled:cursor-not-allowed text-white bg-blue-500 py-2 rounded-sm hover:bg-blue-600"
+                        >
                             Sign Up
                         </button>
                     </section>
