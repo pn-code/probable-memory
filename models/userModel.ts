@@ -18,6 +18,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide an email"],
     },
+    birthday: {
+        type: String,
+        required: [true, "Please provide a birthday"],
+    },
+    gender: {
+        type: String,
+        required: [true, "Please provide a gender"],
+    },
     isVerified: {
         type: Boolean,
         default: false,
