@@ -8,7 +8,7 @@ connectDB();
 export async function POST(req: NextRequest) {
     try {
         const reqBody = await req.json();
-        const { firstName, lastName, email, password } = reqBody;
+        const { firstName, lastName, email, password, gender, birthday } = reqBody;
         console.log(reqBody);
 
         // Check if user already exists
@@ -31,6 +31,8 @@ export async function POST(req: NextRequest) {
             lastName,
             email,
             password: hashedPassword,
+            gender,
+            birthday
         });
 
         const savedUser = await newUser.save();
@@ -44,6 +46,7 @@ export async function POST(req: NextRequest) {
             { status: 201 }
         );
     } catch (error: any) {
+        console.error(error.message)
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
