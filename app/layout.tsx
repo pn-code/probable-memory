@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Navbar from "./components/Navigation/Navbar";
 import SubNavbar from "./components/Navigation/SubNavbar";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
     title: "Definitely Not MySpace",
@@ -18,6 +19,7 @@ export default function RootLayout({
             <body>
                 <Navbar />
                 <SubNavbar />
+                <Toaster />
                 {children}
             </body>
         </html>
