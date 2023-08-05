@@ -58,12 +58,11 @@ export default function SignUp() {
         <div className="w-full h-[65vh] flex flex-col items-center justify-center">
             <form
                 onSubmit={(e) => handleSignUp(e)}
-                className="border-gray-400 border-x border-b rounded-md"
             >
-                <h1 className="mt-48 sm:mt-0 mb-2 text-xl font-semibold bg-navy-blue py-2 px-4 text-white sm:rounded-t-md">
+                <h1 className="mt-48 sm:mt-0 text-xl font-semibold bg-navy-blue py-2 px-4 text-white sm:rounded-t-md">
                     {loading ? "Creating user profile..." : "Sign Up"}
                 </h1>
-                <section className="flex flex-col gap-4 px-2 pb-4 sm:p-4">
+                <section className="flex flex-col gap-4 pt-2 px-2 pb-4 sm:p-4 sm:border-gray-400 sm:border-x sm:border-b">
                     <div className="flex flex-col sm:flex-row justify-between gap-4">
                         <input
                             disabled={loading}
