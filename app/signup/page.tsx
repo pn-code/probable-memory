@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 
 export default function SignUp() {
     const [firstName, setFirstName] = useState<string>("");
@@ -9,7 +9,7 @@ export default function SignUp() {
     const [birthday, setBirthday] = useState<string>("");
     const [gender, setGender] = useState<string>("male");
 
-    const handleSignUp = async (e: Event) => {
+    const handleSignUp = async (e: FormEvent) => {
         e.preventDefault();
         const payload = {
             firstName,
