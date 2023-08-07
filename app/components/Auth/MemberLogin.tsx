@@ -24,7 +24,8 @@ export default function MemberLogin() {
             setLoading(true);
             const payload = { email, password };
             const res = await axios.post("/api/users/login", payload);
-            console.log(res);
+            console.log(res.data)
+            toast.success("Login success!")
         } catch (error: any) {
             console.error(error.message);
             toast.error(error.message);
@@ -33,16 +34,13 @@ export default function MemberLogin() {
         }
     };
 
-    console.log("email", email);
-    console.log("password", password);
-
     return (
         <form
             onSubmit={(e) => handleLogin(e)}
             className="flex-1 border-navy-blue border-2 rounded-sm my-2"
         >
             <h2 className="w-full bg-navy-blue text-white pl-4 py-1 font-semibold">
-                Member Login
+                {loading ? "Logging in" :  "Member Login"}
             </h2>
             <section className="flex flex-col gap-4 p-4 max-w-[320px]">
                 <section className="flex gap-2 justify-between">
