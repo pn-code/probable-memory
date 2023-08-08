@@ -1,4 +1,5 @@
 "use client";
+import formatDateFromISO from "@/helpers/formatDateFromISO";
 import axios from "axios";
 import {
     AlertTriangle,
@@ -12,17 +13,6 @@ import {
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-interface UserData {
-    birthday: string;
-    email: string;
-    firstName: string;
-    gender: string;
-    isAdmin: boolean;
-    isVerified: boolean;
-    lastName: string;
-    _id: string;
-}
-
 export default function ProfilePage({
     params,
 }: {
@@ -30,8 +20,8 @@ export default function ProfilePage({
 }) {
     const HOST_URL = process.env.NEXT_PUBLIC_HOST_URL;
 
-    const [userData, setUserData] = useState<UserData>();
-    const userFullName = `${userData?.firstName} ${userData?.lastName}`;
+    const [userData, setUserData] = useState<UserData | null>(null);
+    const userFullName = userData ? `${userData?.firstName} ${userData?.lastName}` : "User";
 
     useEffect(() => {
         const getUserDetails = async () => {
@@ -142,7 +132,7 @@ export default function ProfilePage({
                             </div>
                             <div>
                                 <div className=" text-left px-2 bg-blue-100 text-gray-900 m-1 py-1 text-sm w-full">
-                                    3/1/2010
+                                    {userData ? formatDateFromISO(userData?.created_at) : ""}
                                 </div>
                             </div>
                         </div>
