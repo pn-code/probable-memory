@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import {
     AppWindow,
@@ -6,15 +7,27 @@ import {
     Compass,
     Flame,
     Home,
-    Info,
     Laugh,
     Music,
     ScrollText,
+    User,
     Users,
     Video,
 } from "lucide-react";
+import axios from "axios";
 
 export default function SubNavbar() {
+
+    const [user, setUser] = useState<UserData>()
+    
+    useEffect(() => {
+        const getCurrentUserData = async () => {
+            const res = await axios.get("/api/users/me");
+            setUser(res.data.user);
+        };
+        getCurrentUserData();
+    }, []);
+
     return (
         <nav className="w-full hidden md:flex border-b border-navy-blue/50 mb-2">
             <ul className="flex w-full">
@@ -41,7 +54,7 @@ export default function SubNavbar() {
                         className="flex flex-col text-gray-600 justify-center items-center text-sm hover:bg-blue-500 ease-linear duration-200 hover:text-gray-100 p-4"
                         href="/"
                     >
-                        <Flame/>
+                        <Flame />
                         <span>Trending</span>
                     </Link>
                 </li>
@@ -111,10 +124,10 @@ export default function SubNavbar() {
                 <li className="flex-1">
                     <Link
                         className="flex flex-col text-gray-600 justify-center items-center text-sm hover:bg-blue-500 ease-linear duration-200 hover:text-gray-100 p-4"
-                        href="/"
+                        href={`/profile/${user?._id}`}
                     >
-                        <Info />
-                        <span>About</span>
+                        <User />
+                        <span>My Profile</span>
                     </Link>
                 </li>
             </ul>
