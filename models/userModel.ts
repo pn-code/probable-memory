@@ -30,7 +30,8 @@ const userSchema = new mongoose.Schema(
         info: {
             influences: { type: String },
             hobbies: { type: String },
-            description: { type: String },
+            status: { type: String },
+            bio: { type: String },
             title: { type: String },
         },
         isVerified: {
