@@ -127,7 +127,7 @@ export default function SubNavbar() {
                         href={`/profile/${user?._id}`}
                     >
                         <User />
-                        <span>My Profile</span>
+                        <span>Profile</span>
                     </Link>
                 </li>
             </ul>
