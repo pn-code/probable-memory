@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import Navbar from "./components/Navigation/Navbar";
-import SubNavbar from "./components/Navigation/SubNavbar";
+import Navbar from "./components/navigation/Navbar";
+import SubNavbar from "./components/navigation/SubNavbar";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
