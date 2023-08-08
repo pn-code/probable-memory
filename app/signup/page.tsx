@@ -31,7 +31,7 @@ export default function SignUp() {
             };
 
             const res = await axios.post("/api/users/signup", payload);
-            router.push("/");
+            router.push("/onboarding");
         } catch (error: any) {
             console.error(error.message);
             toast.error(error.message)
