@@ -9,6 +9,11 @@ connectDB();
 export async function GET(req: NextRequest) {
     try {
         const userId = getDataFromToken(req);
+
+        if (!userId) {
+            return NextResponse.json({ user: null });
+        }
+
         const user = await User.findOne({ _id: userId }).select("-password");
 
         if (!user) {
