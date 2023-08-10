@@ -6,17 +6,19 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-const CLOUDINARY_URL = process.env.NEXT_PUBLIC_CLOUDINARY_URL;
-
-export default function AccountForm() {
+export default function AccountForm({
+    cloudinaryUrl,
+}: {
+    cloudinaryUrl: string;
+}) {
     const [profileImage, setProfileImage] = useState<string>(
         defaultProfile.src
     );
-    const [hobbies, setHobbies] = useState("");
-    const [influences, setInfluences] = useState("");
-    const [location, setLocation] = useState("");
-    const [bio, setBio] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [hobbies, setHobbies] = useState<string>("");
+    const [influences, setInfluences] = useState<string>("");
+    const [location, setLocation] = useState<string>("");
+    const [bio, setBio] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false);
 
     const router = useRouter();
 
@@ -43,7 +45,7 @@ export default function AccountForm() {
             formData.append("upload_preset", "mighty-uploads");
 
             const { data } = await axios.post(
-                CLOUDINARY_URL as string,
+                cloudinaryUrl,
                 formData
             );
 
@@ -65,8 +67,8 @@ export default function AccountForm() {
             };
 
             const res = await axios.post("/api/users/onboarding", payload);
-            toast.success("You successfully completed your user profile.")
-            router.push(`/profile/${res.data.user._id}`)
+            toast.success("You successfully completed your user profile.");
+            router.push(`/profile/${res.data.user._id}`);
         } catch (error) {
             console.error("Ran into an error");
         } finally {
