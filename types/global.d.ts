@@ -15,7 +15,12 @@ interface UserData {
         influences: string;
         location: string;
         profileImageUrl: string;
-        status: string,
-        title: string
+        status: string;
+        title: string;
     };
+}
+
+interface UserContext {
+    user: UserData | null;
+    setUpdateUser: any;
 }
