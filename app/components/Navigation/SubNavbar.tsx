@@ -17,13 +17,15 @@ import {
 import axios from "axios";
 
 export default function SubNavbar() {
+    const [user, setUser] = useState<UserData | null>(null);
 
-    const [user, setUser] = useState<UserData>()
-    
     useEffect(() => {
         const getCurrentUserData = async () => {
             const res = await axios.get("/api/users/me");
-            setUser(res.data.user);
+
+            if (res.data.user) {
+                setUser(res.data.user);
+            }
         };
         getCurrentUserData();
     }, []);
@@ -124,7 +126,7 @@ export default function SubNavbar() {
                 <li className="flex-1">
                     <Link
                         className="flex flex-col text-gray-600 justify-center items-center text-sm hover:bg-blue-500 ease-linear duration-200 hover:text-gray-100 p-4"
-                        href={`/profile/${user?._id}`}
+                        href={user ? `/profile/${user?._id}` : "/"}
                     >
                         <User />
                         <span>Profile</span>

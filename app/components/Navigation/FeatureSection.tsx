@@ -1,7 +1,6 @@
 import Link from "next/link";
-import React from "react";
 
-function FeatureSection() {
+export default function FeatureSection() {
     return (
         <div className="w-full flex flex-col bg-blue-100 rounded-sm mr-8 px-4 py-2 gap-2 border-navy-blue/40 border my-2">
             <ul className="grid grid-cols-2 gap-4 lg:flex lg:justify-between text-blue-900 flex-wrap">
@@ -36,5 +35,3 @@ function FeatureSection() {
         </div>
     );
 }
-
-export default FeatureSection;
