@@ -1,8 +1,8 @@
 import { getClient } from "@/lib/client";
 
 import { gql } from "@apollo/client";
-import MemberLogin from "./components/auth/MemberLogin";
-import FeatureSection from "./components/navigation/FeatureSection";
+import MemberLogin from "@/app/components/auth/MemberLogin";
+import FeatureSection from "@/app/components/navigation/FeatureSection";
 
 const query = gql`
     query Now {
