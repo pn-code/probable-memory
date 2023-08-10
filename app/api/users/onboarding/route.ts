@@ -8,9 +8,7 @@ connectDB();
 export async function POST(req: NextRequest) {
     try {
         const reqBody = await req.json();
-        const { hobbies, location, bio, influences } = reqBody;
-
-        console.log(location)
+        const { hobbies, location, bio, influences, profileImageUrl } = reqBody;
 
         const userId = getDataFromToken(req);
 
@@ -22,7 +20,9 @@ export async function POST(req: NextRequest) {
         }
 
         const user = await User.findByIdAndUpdate(userId, {
-            $set: { info: { hobbies, location, bio, influences } },
+            $set: {
+                info: { hobbies, location, bio, influences, profileImageUrl },
+            },
         });
 
         const savedUser = await user.save();
