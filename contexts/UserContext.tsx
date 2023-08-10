@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 
-export const UserContext = createContext<UserData | null>(null);
+export const UserContext = createContext<UserContext | null>(null);
 
 export const UserContextProvider = ({
     children,
@@ -9,6 +9,8 @@ export const UserContextProvider = ({
     children: React.ReactNode;
 }) => {
     const [user, setUser] = useState(null);
+    const [updateUser, setUpdateUser] = useState(false);
+
     useEffect(() => {
         async function getUserData() {
             const res = await axios.get("/api/users/me");
@@ -16,7 +18,7 @@ export const UserContextProvider = ({
         }
 
         getUserData();
-    }, []);
+    }, [updateUser]);
 
-    return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+    return <UserContext.Provider value={{user, setUpdateUser}}>{children}</UserContext.Provider>;
 };
