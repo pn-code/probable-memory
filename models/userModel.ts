@@ -28,7 +28,9 @@ const userSchema = new mongoose.Schema(
             required: [true, "Please provide a gender"],
         },
         info: {
+            profileImageUrl: { type: String },
             influences: { type: String },
+            location: { type: String },
             hobbies: { type: String },
             status: { type: String },
             bio: { type: String },
