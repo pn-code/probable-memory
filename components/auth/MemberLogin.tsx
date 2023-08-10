@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { FormEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -10,6 +11,8 @@ export default function MemberLogin() {
     const [password, setPassword] = useState<string>("");
     const [disableLogin, setDisableLogin] = useState<boolean>(true);
     const [loading, setLoading] = useState<boolean>(false);
+
+    const router = useRouter();
 
     useEffect(() => {
         const updateUserViaToken = async () => {
@@ -35,6 +38,7 @@ export default function MemberLogin() {
             const res = await axios.post("/api/users/login", payload);
             console.log(res.data);
             toast.success("Login success!");
+            router.refresh();
         } catch (error: any) {
             console.error(error.message);
             toast.error(error.message);
