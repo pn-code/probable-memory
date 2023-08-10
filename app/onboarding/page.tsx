@@ -1,7 +1,6 @@
-import React from "react";
 import AccountForm from "../components/forms/AccountForm";
 
-export default function OnboardingPage() {
+export default async function OnboardingPage() {
     return (
         <main className="w-full h-full">
             <h1 className="text-2xl font-semibold bg-navy-blue text-white p-4 lg:rounded-t-sm">
