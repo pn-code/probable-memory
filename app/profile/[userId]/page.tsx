@@ -21,8 +21,6 @@ export default function ProfilePage({
 }: {
     params: { userId: string };
 }) {
-    const HOST_URL = process.env.NEXT_PUBLIC_HOST_URL;
-
     const [userData, setUserData] = useState<UserData | null>(null);
     const userFullName = userData
         ? `${userData?.firstName} ${userData?.lastName}`
@@ -125,7 +123,7 @@ export default function ProfilePage({
                         <Link
                             className="text-sm text-blue-900 hover:text-blue-500 underline"
                             href={`/profile/${params.userId}`}
-                        >{`${HOST_URL}/profile/${params.userId}`}</Link>
+                        >{`/profile/${params.userId}`}</Link>
                     </section>
 
                     {/* General Info */}
