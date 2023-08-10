@@ -11,7 +11,14 @@ export async function GET(req: NextRequest) {
         const userId = getDataFromToken(req);
 
         if (!userId) {
-            return NextResponse.json({ user: null });
+                const response = NextResponse.json({ user: null });
+        
+                response.cookies.set("token", "", {
+                    httpOnly: true,
+                    expires: new Date(0),
+                });
+        
+                return response;
         }
 
         const user = await User.findOne({ _id: userId }).select("-password");
