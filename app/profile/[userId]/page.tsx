@@ -1,5 +1,5 @@
 "use client";
-import UserHeader from "@/app/components/profile/UserHeader";
+import UserHeader from "@/components/profile/UserHeader";
 import { UserContextProvider } from "@/contexts/UserContext";
 import formatDateFromISO from "@/helpers/formatDateFromISO";
 import axios from "axios";

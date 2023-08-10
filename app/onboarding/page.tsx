@@ -1,5 +1,5 @@
 import axios from "axios";
-import AccountForm from "../components/forms/AccountForm";
+import AccountForm from "@/components/forms/AccountForm";
 
 export default async function OnboardingPage() {
     const cloudinaryRes = await axios.get(`${process.env.HOST_URL}/api/images`)
