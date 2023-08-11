@@ -1,26 +1,20 @@
 "use client";
+import { UserContext } from "@/contexts/UserContext";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function MemberLogin() {
-    const [user, setUser] = useState(null);
+    const user = useContext(UserContext);
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [disableLogin, setDisableLogin] = useState<boolean>(true);
     const [loading, setLoading] = useState<boolean>(false);
 
+    console.log(user);
     const router = useRouter();
-
-    useEffect(() => {
-        const updateUserViaToken = async () => {
-            const res = await axios.get("/api/users/me");
-            setUser(res.data.user);
-        };
-        updateUserViaToken();
-    }, []);
 
     useEffect(() => {
         if (email.length > 0 && password.length > 0) {
@@ -44,12 +38,13 @@ export default function MemberLogin() {
             toast.error(error.message);
         } finally {
             setLoading(false);
+            user?.setUpdateUser(true);
         }
     };
 
     return (
         <>
-            {!user && (
+            {!user?.user && (
                 <form
                     onSubmit={(e) => handleLogin(e)}
                     className="flex-1 border-navy-blue border-2 rounded-sm my-2"
