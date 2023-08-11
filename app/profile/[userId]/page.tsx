@@ -1,6 +1,6 @@
 "use client";
 import UserHeader from "@/components/profile/UserHeader";
-import Spinner from "@/components/ui/spinner";
+import Spinner from "@/components/ui/Spinner";
 import { UserContextProvider } from "@/contexts/UserContext";
 import formatDateFromISO from "@/helpers/formatDateFromISO";
 import axios from "axios";
