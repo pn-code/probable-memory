@@ -30,6 +30,7 @@ export default function UserHeader({
             console.log(res);
             toast.success("You have been logged out. Redirecting...");
             router.replace("/");
+            router.refresh();
         } catch (error) {
             console.error(error);
             toast.error("An error has occurred while logging out.");
