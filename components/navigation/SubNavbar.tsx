@@ -1,5 +1,3 @@
-"use client";
-import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import {
     AppWindow,
@@ -14,21 +12,10 @@ import {
     Users,
     Video,
 } from "lucide-react";
-import axios from "axios";
+import { getCurrentUser } from "@/helpers/getCurrentUser";
 
-export default function SubNavbar() {
-    const [user, setUser] = useState<UserData | null>(null);
-
-    useEffect(() => {
-        const getCurrentUserData = async () => {
-            const res = await axios.get("/api/users/me");
-
-            if (res.data.user) {
-                setUser(res.data.user);
-            }
-        };
-        getCurrentUserData();
-    }, []);
+export default async function SubNavbar() {
+    const currentUser = await getCurrentUser();
 
     return (
         <nav className="w-full hidden md:flex border-b border-navy-blue/50 mb-2">
@@ -126,10 +113,10 @@ export default function SubNavbar() {
                 <li className="flex-1">
                     <Link
                         className="flex flex-col text-gray-600 justify-center items-center text-sm hover:bg-blue-500 ease-linear duration-200 hover:text-gray-100 p-4"
-                        href={user ? `/profile/${user?._id}` : "/"}
+                        href={currentUser ? `/profile/${currentUser?._id}` : "/signup"}
                     >
                         <User />
-                        <span>Profile</span>
+                        <span>{currentUser ? "Profile" : "Sign Up"}</span>
                     </Link>
                 </li>
             </ul>

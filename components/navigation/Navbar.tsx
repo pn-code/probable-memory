@@ -1,7 +1,10 @@
+import { getCurrentUser } from "@/helpers/getCurrentUser";
 import { Globe2, Users2 } from "lucide-react";
 import Link from "next/link";
 
-export default function Navbar() {
+export default async function Navbar() {
+    const currentUser = await getCurrentUser();
+
     return (
         <nav className="w-full bg-navy-blue text-[#FFFF] px-4 py-2 flex justify-between">
             {/* Left Side & Brand Logo & Home Navigation */}
@@ -11,7 +14,9 @@ export default function Navbar() {
                     <h1 className="text-xl sm:text-3xl font-semibold tracking-tight">
                         definitely not myspace
                     </h1>
-                    <span className="text-xs sm:text-[16px]">not just a place for friends</span>
+                    <span className="text-xs sm:text-[16px]">
+                        not just a place for friends
+                    </span>
                 </section>
             </Link>
 
@@ -20,18 +25,29 @@ export default function Navbar() {
                 {/* Upper Right Side */}
                 <ul className="flex gap-2.5 text-sm mt-1">
                     <li>
-                        <Link className="flex gap-1 items-center hover:text-gray-300" href="/">
+                        <Link
+                            className="flex gap-1 items-center hover:text-gray-300"
+                            href="/"
+                        >
                             <Globe2 size={16} /> International
                         </Link>
                     </li>
                     <span>|</span>
                     <li>
-                        <Link className=" hover:text-gray-300"  href="/">Help</Link>{" "}
+                        <Link className=" hover:text-gray-300" href="/">
+                            Help
+                        </Link>{" "}
                     </li>
-                    <span>|</span>
-                    <li>
-                        <Link className=" hover:text-gray-300"  href="/">Sign Up</Link>
-                    </li>
+                    {!currentUser && (
+                        <>
+                            <span>|</span>
+                            <li>
+                                <Link className=" hover:text-gray-300" href="/">
+                                    Sign Up
+                                </Link>
+                            </li>
+                        </>
+                    )}
                 </ul>
 
                 {/* Bottom Right Side | Search Bar */}
