@@ -1,6 +1,7 @@
 import UserHeader from "@/components/profile/UserHeader";
 import formatDateFromISO from "@/helpers/formatDateFromISO";
 import { getUserProfile } from "@/helpers/getUserProfile";
+import { getCurrentUser } from "@/helpers/getCurrentUser";
 import {
     AlertTriangle,
     Mail,
@@ -17,21 +18,10 @@ export default async function ProfilePage({
 }: {
     params: { userId: string };
 }) {
-    const user = await getUserProfile(params.userId);
+    const currentUser = await getCurrentUser();
+    const user = await getUserProfile(params.userId) as UserData | null;
 
-    const userFullName = user ? `${user?.firstName} ${user?.lastName}` : "User";
-
-    // Load user's profile
-    // useEffect(() => {
-    //     const getUserDetails = async () => {
-    //         const res = await axios.get(
-    //             `/api/users/user_data/${params.userId}`
-    //         );
-    //         setUserData(res.data.user);
-    //     };
-
-    //     getUserDetails();
-    // }, []);
+    const userFullName = user ? `${user?.firstName!} ${user?.lastName!}` : "User";
 
     return (
         <main className="xl:mx-[20%] flex flex-col px-2 gap-4 py-4 md:flex-row md:gap-10">
@@ -44,6 +34,7 @@ export default async function ProfilePage({
                         userId={user?._id!}
                         fullName={userFullName}
                         title={user?.title || ""}
+                        currentUserId={currentUser?._id}
                     />
 
                     {/* User Picture, Status, and Location */}

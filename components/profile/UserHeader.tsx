@@ -10,18 +10,18 @@ export default function UserHeader({
     fullName,
     title,
     userId,
+    currentUserId,
 }: {
     fullName: string;
     title: string;
     userId: string;
+    currentUserId: string;
 }) {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
-    const user = useContext(UserContext);
-    const currentUser = user?.user || null
 
     const isCurrentUserProfile =
-        currentUser?._id != null && currentUser?._id === userId;
+        currentUserId != null && currentUserId === userId;
 
     const handleUserLogOut = async () => {
         try {
