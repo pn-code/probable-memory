@@ -8,7 +8,6 @@ import {
     Mail,
     MessageCircle,
     Star,
-    User,
     UserPlus,
     Users2,
 } from "lucide-react";
@@ -26,6 +25,7 @@ export default function ProfilePage({
         ? `${userData?.firstName} ${userData?.lastName}`
         : "User";
 
+    // Load user's profile
     useEffect(() => {
         const getUserDetails = async () => {
             const res = await axios.get(
@@ -63,7 +63,6 @@ export default function ProfilePage({
                             <div className="block text-sm">
                                 <div className="">{userData?.info.status}</div>
                                 <p>{userData?.info.location}</p>
-                                
                             </div>
                         </section>
                     </div>

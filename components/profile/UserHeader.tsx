@@ -17,7 +17,8 @@ export default function UserHeader({
 }) {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
-    const currentUser = useContext(UserContext) as UserData;
+    const user = useContext(UserContext);
+    const currentUser = user?.user || null
 
     const isCurrentUserProfile =
         currentUser?._id != null && currentUser?._id === userId;
