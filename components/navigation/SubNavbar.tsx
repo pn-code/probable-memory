@@ -108,7 +108,7 @@ export default function SubNavbar() {
                 <li className="flex-1">
                     <Link
                         className="flex flex-col text-gray-600 justify-center items-center text-sm hover:bg-blue-500 ease-linear duration-200 hover:text-gray-100 p-4"
-                        href="/"
+                        href="/discover"
                     >
                         <Music />
                         <span>Music</span>
