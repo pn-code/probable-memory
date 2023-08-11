@@ -1,5 +1,6 @@
 "use client";
 import UserHeader from "@/components/profile/UserHeader";
+import Spinner from "@/components/ui/spinner";
 import { UserContextProvider } from "@/contexts/UserContext";
 import formatDateFromISO from "@/helpers/formatDateFromISO";
 import axios from "axios";
@@ -21,6 +22,7 @@ export default function ProfilePage({
     params: { userId: string };
 }) {
     const [userData, setUserData] = useState<UserData | null>(null);
+
     const userFullName = userData
         ? `${userData?.firstName} ${userData?.lastName}`
         : "User";
@@ -53,12 +55,12 @@ export default function ProfilePage({
 
                         {/* User Picture, Status, and Location */}
                         <section className="w-full flex gap-8 items-center">
-                            <Image
+                            {userData?.info.profileImageUrl ? <Image
                                 src={userData?.info.profileImageUrl!}
                                 alt={`${userFullName} profile image`}
                                 height={300}
                                 width={200}
-                            />
+                            /> : <Spinner/>}
 
                             <div className="block text-sm">
                                 <div className="">{userData?.info.status}</div>
