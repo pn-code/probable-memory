@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export const UserContext = createContext<UserContext | null>(null);
 
@@ -13,12 +14,25 @@ export const UserContextProvider = ({
 
     useEffect(() => {
         async function getUserData() {
-            const res = await axios.get("/api/users/me");
-            setUser(res.data.user);
+            try {
+                const res = await axios.get("/api/users/me");
+                setUser(res.data.user);
+            } catch (error) {
+                console.error(error);
+                toast.error("Failed to fetch user data");
+            } finally {
+                if (updateUser === true) {
+                    setUpdateUser(false);
+                }
+            }
         }
 
         getUserData();
     }, [updateUser]);
 
-    return <UserContext.Provider value={{user, setUpdateUser}}>{children}</UserContext.Provider>;
+    return (
+        <UserContext.Provider value={{ user, setUpdateUser }}>
+            {children}
+        </UserContext.Provider>
+    );
 };
