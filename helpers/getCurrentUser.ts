@@ -17,9 +17,9 @@ export async function getCurrentUser() {
 
         // isolate user id
         const userId = user.id;
-        const currentUser = await User.findById(userId).select("-password");
+        const currentUser = await User.findById(userId).select("-password").lean();
 
-        return currentUser;
+        return {...currentUser, _id: userId};
     } catch (error) {
         console.error("No user found");
     }
