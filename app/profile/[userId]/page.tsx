@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import defaultProfileImage from "@/public/assets/users/default_profile.png"
 
 export default async function ProfilePage({
     params,
@@ -21,6 +22,7 @@ export default async function ProfilePage({
     const currentUser = await getCurrentUser();
     const user = await getUserProfile(params.userId) as UserData | null;
 
+    const userProfileImage = user?.info?.profileImageUrl ? user.info.profileImageUrl : defaultProfileImage
     const userFullName = user ? `${user?.firstName!} ${user?.lastName!}` : "User";
 
     return (
@@ -40,15 +42,15 @@ export default async function ProfilePage({
                     {/* User Picture, Status, and Location */}
                     <section className="w-full flex gap-8 items-center">
                         <Image
-                            src={user?.info.profileImageUrl!}
+                            src={userProfileImage}
                             alt={`${userFullName} profile image`}
                             height={300}
                             width={200}
                         />
 
                         <div className="block text-sm">
-                            <div className="">{user?.info.status}</div>
-                            <p>{user?.info.location}</p>
+                            <div className="">{user?.info?.status || ""}</div>
+                            <p>{user?.info?.location || "Earth"}</p>
                         </div>
                     </section>
                 </div>
@@ -137,7 +139,7 @@ export default async function ProfilePage({
                             </div>
                             <div>
                                 <div className="text-left px-2 bg-blue-100 text-gray-900 m-1 py-1 text-sm w-full">
-                                    {user?.info.influences}
+                                    {user?.info?.influences || "None"}
                                 </div>
                             </div>
                         </div>
@@ -149,7 +151,7 @@ export default async function ProfilePage({
                             </div>
                             <div>
                                 <div className="text-left px-2 bg-blue-100 text-gray-900 m-1 py-1 text-sm w-full">
-                                    {user?.info.hobbies}
+                                    {user?.info?.hobbies || "None"}
                                 </div>
                             </div>
                         </div>
@@ -163,7 +165,7 @@ export default async function ProfilePage({
                     <h3 className="bg-orange-300/60 text-orange-600 font-semibold px-2">
                         About {userFullName}
                     </h3>
-                    <p className="text-sm px-2 mt-1">{user?.info.bio}</p>
+                    <p className="text-sm px-2 mt-1">{user?.info?.bio || "None"}</p>
                 </header>
                 {/* About Section */}
             </section>
