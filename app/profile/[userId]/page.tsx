@@ -12,7 +12,8 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import defaultProfileImage from "@/public/assets/users/default_profile.png"
+import defaultProfileImage from "@/public/assets/users/default_profile.png";
+import AboutSection from "@/components/profile/AboutSection";
 
 export default async function ProfilePage({
     params,
@@ -20,10 +21,14 @@ export default async function ProfilePage({
     params: { userId: string };
 }) {
     const currentUser = await getCurrentUser();
-    const user = await getUserProfile(params.userId) as UserData | null;
+    const user = (await getUserProfile(params.userId)) as UserData | null;
 
-    const userProfileImage = user?.info?.profileImageUrl ? user.info.profileImageUrl : defaultProfileImage
-    const userFullName = user ? `${user?.firstName!} ${user?.lastName!}` : "User";
+    const userProfileImage = user?.info?.profileImageUrl
+        ? user.info.profileImageUrl
+        : defaultProfileImage;
+    const userFullName = user
+        ? `${user?.firstName!} ${user?.lastName!}`
+        : "User";
 
     return (
         <main className="xl:mx-[20%] flex flex-col px-2 gap-4 py-4 md:flex-row md:gap-10">
@@ -161,13 +166,10 @@ export default async function ProfilePage({
 
             {/* Right Side */}
             <section className="md:w-[800px]">
-                <header>
-                    <h3 className="bg-orange-300/60 text-orange-600 font-semibold px-2">
-                        About {userFullName}
-                    </h3>
-                    <p className="text-sm px-2 mt-1">{user?.info?.bio || "None"}</p>
-                </header>
-                {/* About Section */}
+                <AboutSection
+                    userFullName={userFullName}
+                    bio={user?.info?.bio}
+                />
             </section>
         </main>
     );
