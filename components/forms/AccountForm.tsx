@@ -44,10 +44,7 @@ export default function AccountForm({
             formData.append("file", file);
             formData.append("upload_preset", "mighty-uploads");
 
-            const { data } = await axios.post(
-                cloudinaryUrl,
-                formData
-            );
+            const { data } = await axios.post(cloudinaryUrl, formData);
 
             return data.secure_url;
         }
@@ -57,18 +54,33 @@ export default function AccountForm({
         e.preventDefault();
         try {
             setLoading(true);
-            const profileImageUrl = await handleImageUpload(e);
-            const payload = {
-                hobbies,
-                influences,
-                location,
-                bio,
-                profileImageUrl,
-            };
+            if (profileImage != defaultProfile.src) {
+                const profileImageUrl = await handleImageUpload(e);
 
-            const res = await axios.post("/api/users/onboarding", payload);
-            toast.success("You successfully completed your user profile.");
-            router.push(`/profile/${res.data.user._id}`);
+                const payload = {
+                    hobbies,
+                    influences,
+                    location,
+                    bio,
+                    profileImageUrl,
+                };
+
+                const res = await axios.post("/api/users/onboarding", payload);
+                toast.success("You successfully completed your user profile.");
+                router.push(`/profile/${res.data.user._id}`);
+            } else {
+                const payload = {
+                    hobbies,
+                    influences,
+                    location,
+                    bio,
+                    profileImageUrl: null,
+                };
+
+                const res = await axios.post("/api/users/onboarding", payload);
+                toast.success("You successfully completed your user profile.");
+                router.push(`/profile/${res.data.user._id}`);
+            }
         } catch (error) {
             console.error("Ran into an error");
         } finally {
