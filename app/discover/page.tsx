@@ -62,6 +62,7 @@ const Discover = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 mt-4">
                     {searchResults.map((result) => (
                         <MusicSearchResult
+                            key={result.id}
                             title={result.title}
                             album={result.album}
                             artist={result.artist}
